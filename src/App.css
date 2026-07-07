@@ -24,11 +24,10 @@ body{
   align-items:center;
   text-align:center;
 
-  background:url("/maa bg.jpg");
+  background: url("/maa bg.jpeg");
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  background-size:cover;
-  background-position:center center;
-  background-attachment: scroll;
 
   overflow:hidden;
 }
