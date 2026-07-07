@@ -22,12 +22,13 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-
   text-align:center;
 
   background:url("/maa bg.jpeg");
+  background-repeat: no-repeat;
   background-size:cover;
-  background-position:center;
+  background-position:center center;
+  background-attachment: scroll;
 
   overflow:hidden;
 }
