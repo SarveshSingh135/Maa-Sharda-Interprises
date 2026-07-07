@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 export default function Hero() {
   const navigate = useNavigate();
   const heroBanner =
-  localStorage.getItem("heroBanner") || "/hero.jpg";
+  localStorage.getItem("heroBanner") || "/maa bg.jpg";
 
   return (
     <section
