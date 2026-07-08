@@ -67,7 +67,7 @@ export default function FurniturePage() {
               key={index}
             >
               <img
-                src={item.image}
+                src={item.images?.[0]}
                 alt={item.name}
                 className="product-img"
               />
