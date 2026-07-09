@@ -32,37 +32,42 @@ export default function Navbar() {
             menuOpen ? "active" : ""
           }`}
         >
-          <Link to="/home">Home</Link>
-
-          <Link to="/electronics">
-            Electronics
+          <Link to="/home" onClick={() => setMenuOpen(false)}>
+                 Home
           </Link>
 
-          <Link to="/furniture">
-            Furniture
+          <Link to="/electronics" onClick={() => setMenuOpen(false)}>
+                 Electronics
           </Link>
 
-          <Link to="/appliances">
-            Appliances
+          <Link to="/furniture" onClick={() => setMenuOpen(false)}>
+                 Furniture
           </Link>
 
-          <Link to="/electrical">
-            Electrical
+          <Link to="/appliances" onClick={() => setMenuOpen(false)}>
+                 Appliances
           </Link>
 
-          <Link to="/contact">
-            Contact
+          <Link to="/electrical" onClick={() => setMenuOpen(false)}>
+                 Electrical
           </Link>
 
-          <Link to="/cart">
-            🛒 Cart
+          <Link to="/contact" onClick={() => setMenuOpen(false)}>
+                 Contact
           </Link>
-          \<div
-           className="nav-link"
-            onClick={() => navigate("/my-orders")}
-          >
-            📦 My Orders
-            </div>
+
+          <Link to="/cart" onClick={() => setMenuOpen(false)}>
+                 🛒 Cart
+          </Link>
+        <div
+  className="nav-link"
+  onClick={() => {
+    navigate("/my-orders");
+    setMenuOpen(false);
+  }}
+>
+  📦 My Orders
+</div>
         </div>
 
       </div>
