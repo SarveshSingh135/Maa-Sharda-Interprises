@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders - Maa Sharda Enterprises</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        .orders-page {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .orders-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .order-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #fff3cd;
+            color: #856404;
+            font-weight: bold;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-total {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .empty-orders {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 600px) {
+
+            .order-header {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+
+            <a href="{{ url_for('home') }}">
+                Maa Sharda Enterprises
+            </a>
+
+        </div>
+
+        <div>
+
+            <a href="{{ url_for('home') }}">
+                Home
+            </a>
+
+            <a href="{{ url_for('products') }}">
+                Products
+            </a>
+
+            <a href="{{ url_for('cart') }}">
+                🛒 Cart
+            </a>
+
+            <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <section class="orders-page">
+
+        <h1 class="orders-title">
+            📦 My Orders
+        </h1>
+
+
+        {% if orders %}
+
+            {% for order in orders %}
+
+                <div class="order-card">
+
+                    <div class="order-header">
+
+                        <div>
+
+                            <strong>
+                                Order #{{ order.id }}
+                            </strong>
+
+                            <br>
+
+                            <small>
+                                {{ order.created_at }}
+                            </small>
+
+                        </div>
+
+                        <span class="status">
+                            {{ order.status }}
+                        </span>
+
+                    </div>
+
+
+                    {% for item in order.items %}
+
+                        <div class="order-item">
+
+                            <span>
+
+                                {{ item.product_name }}
+
+                                × {{ item.quantity }}
+
+                            </span>
+
+                            <strong>
+
+                                ₹{{ "%.2f"|format(item.subtotal) }}
+
+                            </strong>
+
+                        </div>
+
+                    {% endfor %}
+
+
+                    <div class="order-total">
+
+                        Total:
+                        ₹{{ "%.2f"|format(order.total_amount) }}
+
+                    </div>
+
+
+                    <p>
+                        <strong>Delivery Address:</strong>
+                        {{ order.address }}
+                    </p>
+
+                    <p>
+                        <strong>Phone:</strong>
+                        {{ order.phone }}
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-orders">
+
+                <h2>
+                    No orders yet 📦
+                </h2>
+
+                <p>
+                    Aapne abhi koi order nahi kiya hai.
+                </p>
+
+                <a
+                    href="{{ url_for('products') }}"
+                    class="shop-btn"
+                >
+                    Start Shopping
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</body>
+
+</html>

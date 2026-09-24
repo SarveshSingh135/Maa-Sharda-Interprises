@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Manage Orders - Maa Sharda Enterprises</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #182238;
+        }
+
+        .navbar {
+            background: #182238;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .back {
+            background: white;
+            color: #182238;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 30px;
+        }
+
+        .order-card {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 18px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.07);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .order-header h2 {
+            margin: 0;
+        }
+
+        .order-date {
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .customer {
+            margin-bottom: 20px;
+        }
+
+        .customer p {
+            margin: 8px 0;
+            font-size: 17px;
+        }
+
+        .items {
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+
+            font-size: 17px;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .status-form {
+            margin-top: 25px;
+
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .status-form select {
+            padding: 12px;
+
+            border: 1px solid #ccc;
+            border-radius: 8px;
+
+            font-size: 16px;
+        }
+
+        .status-form button {
+            padding: 12px 20px;
+
+            background: #182238;
+            color: white;
+
+            border: none;
+            border-radius: 8px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .status-form button:hover {
+            opacity: 0.9;
+        }
+
+        .empty {
+            background: white;
+            padding: 50px;
+            text-align: center;
+            border-radius: 18px;
+            font-size: 20px;
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px;
+            }
+
+            .container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .status-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .status-form select,
+            .status-form button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            Maa Sharda Enterprises 👑
+        </div>
+
+        <a
+            href="{{ url_for('owner_dashboard') }}"
+            class="back"
+        >
+            ← Owner Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+        <h1>
+            🛒 Manage Orders
+        </h1>
+
+
+        {% if orders %}
+
+            {% for order in orders %}
+
+                <div class="order-card">
+
+
+                    <!-- ORDER HEADER -->
+
+                    <div class="order-header">
+
+                        <div>
+
+                            <h2>
+                                Order #{{ order.id }}
+                            </h2>
+
+                            <div class="order-date">
+                                {{ order.created_at }}
+                            </div>
+
+                        </div>
+
+                        <strong>
+                            {{ order.status }}
+                        </strong>
+
+                    </div>
+
+
+                    <!-- CUSTOMER -->
+
+                    <div class="customer">
+
+                        <p>
+                            <strong>Customer:</strong>
+                            {{ order.customer_name }}
+                        </p>
+
+                        <p>
+                            <strong>Phone:</strong>
+                            {{ order.phone }}
+                        </p>
+
+                        <p>
+                            <strong>Address:</strong>
+                            {{ order.address }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- ITEMS -->
+
+                    <div class="items">
+
+                        {% for item in order.items %}
+
+                            <div class="item">
+
+                                <span>
+                                    {{ item.product_name }}
+                                    × {{ item.quantity }}
+                                </span>
+
+                                <strong>
+                                    ₹{{ "%.2f"|format(item.subtotal) }}
+                                </strong>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- TOTAL -->
+
+                    <div class="total">
+
+                        Total:
+                        ₹{{ "%.2f"|format(order.total_amount) }}
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('update_order_status', order_id=order.id) }}"
+                        class="status-form"
+                    >
+
+                        <select name="status">
+
+                            <option
+                                value="Pending"
+                                {% if order.status == "Pending" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Pending
+                            </option>
+
+                            <option
+                                value="Confirmed"
+                                {% if order.status == "Confirmed" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Confirmed
+                            </option>
+
+                            <option
+                                value="Shipped"
+                                {% if order.status == "Shipped" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Shipped
+                            </option>
+
+                            <option
+                                value="Delivered"
+                                {% if order.status == "Delivered" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Delivered
+                            </option>
+
+                            <option
+                                value="Cancelled"
+                                {% if order.status == "Cancelled" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Cancelled
+                            </option>
+
+                        </select>
+
+
+                        <button type="submit">
+                            Update Status
+                        </button>
+
+                    </form>
+
+
+                </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <div class="empty">
+
+                No orders found.
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,386 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Dashboard - Maa Sharda Enterprises</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #182238;
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logout {
+            background: #182238;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .welcome {
+            background: #182238;
+            color: white;
+            padding: 35px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+        }
+
+        .welcome h1 {
+            margin: 0 0 10px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #182238;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 15px;
+            }
+
+            .container {
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">Maa Sharda Enterprises</div>
+
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+
+    <div class="container">
+
+        <div class="welcome">
+            <h1>Welcome, {{ name }} 👋</h1>
+            <p>Welcome to your Maa Sharda Enterprises account.</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>🛍️ Products</h2>
+                <p>Explore our household, electrical and appliance products.</p>
+                <a href="/products">View Products →</a>
+            </div>
+
+            <div class="card">
+                <h2>🛒 My Cart</h2>
+                <p>View products added to your shopping cart.</p>
+                <a href="/products">Go to Cart →</a>
+            </div>
+
+            <div class="card">
+                <h2>📦 My Orders</h2>
+                <p>View your orders and order status.</p>
+                <a href="#">Coming Soon →</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>User Dashboard - Maa Sharda Enterprises</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #182238;
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow:
+                0 2px 10px
+                rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logout {
+            background: #182238;
+            color: white;
+
+            padding: 10px 18px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1100px;
+
+            margin: 40px auto;
+
+            padding: 20px;
+        }
+
+        .welcome {
+            background: #182238;
+            color: white;
+
+            padding: 35px;
+
+            border-radius: 18px;
+
+            margin-bottom: 25px;
+        }
+
+        .welcome h1 {
+            margin: 0 0 10px;
+        }
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.07);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card a {
+            display: inline-block;
+
+            margin-top: 10px;
+
+            color: #182238;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 700px) {
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 15px;
+            }
+
+            .container {
+                margin: 20px auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            Maa Sharda Enterprises
+        </div>
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout"
+        >
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <h1>
+                Welcome, {{ name }} 👋
+            </h1>
+
+            <p>
+                Welcome to your Maa Sharda Enterprises account.
+            </p>
+
+        </div>
+
+
+        <!-- CARDS -->
+
+        <div class="cards">
+
+
+            <!-- PRODUCTS -->
+
+            <div class="card">
+
+                <h2>
+                    🛍️ Products
+                </h2>
+
+                <p>
+                    Explore our household, electrical and appliance products.
+                </p>
+
+                <a href="{{ url_for('products') }}">
+                    View Products →
+                </a>
+
+            </div>
+
+
+            <!-- MY CART -->
+
+            <div class="card">
+
+                <h2>
+                    🛒 My Cart
+                </h2>
+
+                <p>
+                    View products added to your shopping cart.
+                </p>
+
+                <a href="{{ url_for('cart') }}">
+                    Go to Cart →
+                </a>
+
+            </div>
+
+
+            <!-- MY ORDERS -->
+
+            <div class="card">
+
+                <h2>
+                    📦 My Orders
+                </h2>
+
+                <p>
+                    View your orders and order status.
+                </p>
+
+                <a href="{{ url_for('my_orders') }}">
+                    View My Orders →
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maa Sharda Enterprises</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">MS</div>
+
+            <div class="logo-text">
+                <h2>Maa Sharda</h2>
+                <span>ENTERPRISES</span>
+            </div>
+        </div>
+
+
+        <nav class="nav-links">
+
+            <a href="#home" class="active">Home</a>
+            <a href="#categories">Categories</a>
+            <a href="/products">Products</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact</a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+            <button class="search-btn" onclick="openSearch()">
+                🔍
+            </button>
+
+            <a href="{{ url_for('login') }}" class="login-btn">
+                👤 Login
+            </a>
+        </div>
+
+
+        <button class="menu-btn" onclick="toggleMenu()">
+            ☰
+        </button>
+
+    </header>
+
+
+    <!-- ================= SEARCH BOX ================= -->
+
+    <div class="search-overlay" id="searchOverlay">
+
+        <div class="search-box">
+
+            <button class="close-search" onclick="closeSearch()">
+                ✕
+            </button>
+
+            <h2>Search Products</h2>
+
+            <div class="search-input-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search electrical items, appliances..."
+                >
+
+                <button onclick="searchProducts()">
+                    Search
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <span class="small-heading">
+                WELCOME TO MAA SHARDA ENTERPRISES
+            </span>
+
+            <h1>
+                Everything For Your
+                <span>Home & Lifestyle.</span>
+            </h1>
+
+            <p>
+                Discover quality electrical products, home appliances,
+                kitchen essentials and complete household collections
+                at Maa Sharda Enterprises.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a href="/products" class="primary-btn">
+                    Explore Products →
+                </a>
+
+                <a href="#categories" class="secondary-btn">
+                    View Categories
+                </a>
+
+            </div>
+
+
+            <div class="hero-features">
+
+                <div>
+                    <strong>100+</strong>
+                    <span>Products</span>
+                </div>
+
+                <div>
+                    <strong>100%</strong>
+                    <span>Quality</span>
+                </div>
+
+                <div>
+                    <strong>24/7</strong>
+                    <span>Support</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-image">
+
+            <div class="hero-circle"></div>
+
+            <div class="appliance-display">
+
+                <div class="appliance-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    Home Essentials
+                </h3>
+
+                <p>
+                    Everything you need
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <section class="section" id="categories">
+
+        <div class="section-heading">
+
+            <span>EXPLORE OUR COLLECTION</span>
+
+            <h2>Shop By Category</h2>
+
+            <p>
+                Find everything you need for your home
+            </p>
+
+        </div>
+
+
+        <div class="category-grid">
+
+
+            <div class="category-card">
+
+                <div class="category-icon">
+                    💍
+                </div>
+
+                <h3>
+                    Dahej Collection
+                </h3>
+
+                <p>
+                    Complete household & wedding essentials
+                </p>
+
+                <a href="#">
+                    Explore →
+                </a>
+
+            </div>
+
+
+            <div class="category-card">
+
+                <div class="category-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Electrical Items
+                </h3>
+
+                <p>
+                    Wires, switches, bulbs & accessories
+                </p>
+
+                <a href="#">
+                    Explore →
+                </a>
+
+            </div>
+
+
+            <div class="category-card">
+
+                <div class="category-icon">
+                    🍳
+                </div>
+
+                <h3>
+                    Kitchen Appliances
+                </h3>
+
+                <p>
+                    Modern appliances for your kitchen
+                </p>
+
+                <a href="#">
+                    Explore →
+                </a>
+
+            </div>
+
+
+            <div class="category-card">
+
+                <div class="category-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    Home Appliances
+                </h3>
+
+                <p>
+                    Fans, coolers & household appliances
+                </p>
+
+                <a href="#">
+                    Explore →
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= OFFER BANNER ================= -->
+
+    <section class="offer-section">
+
+        <div class="offer-content">
+
+            <span>BEST VALUE FOR YOUR HOME</span>
+
+            <h2>
+                Quality Products.
+                <br>
+                Great Prices.
+            </h2>
+
+            <p>
+                Explore our collection and find products
+                that make your home better.
+            </p>
+
+            <a href="#products" class="primary-btn">
+                Shop Now →
+            </a>
+
+        </div>
+
+
+        <div class="offer-icon">
+            🛍️
+        </div>
+
+    </section>
+
+
+    <!-- ================= PRODUCTS ================= -->
+
+    <section class="section" id="products">
+
+        <div class="section-heading">
+
+            <span>OUR PRODUCTS</span>
+
+            <h2>Popular Products</h2>
+
+            <p>
+                Some of our most popular products
+            </p>
+
+        </div>
+
+
+        <div class="product-grid">
+
+
+            <!-- PRODUCT 1 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        Popular
+                    </span>
+
+                    💡
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Electrical
+                    </span>
+
+                    <h3>
+                        LED Bulb
+                    </h3>
+
+                    <p>
+                        Energy efficient LED bulb
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <strong>
+                            ₹199
+                        </strong>
+
+                        <button onclick="addToCart('LED Bulb')">
+                            🛒
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 2 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    🌀
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Home Appliance
+                    </span>
+
+                    <h3>
+                        Table Fan
+                    </h3>
+
+                    <p>
+                        Powerful & efficient table fan
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <strong>
+                            ₹1,499
+                        </strong>
+
+                        <button onclick="addToCart('Table Fan')">
+                            🛒
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 3 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    🍲
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Kitchen
+                    </span>
+
+                    <h3>
+                        Kitchen Set
+                    </h3>
+
+                    <p>
+                        Complete kitchen essentials
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <strong>
+                            ₹2,499
+                        </strong>
+
+                        <button onclick="addToCart('Kitchen Set')">
+                            🛒
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 4 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    🔌
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Electrical
+                    </span>
+
+                    <h3>
+                        Extension Board
+                    </h3>
+
+                    <p>
+                        Safe multi-plug extension board
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <strong>
+                            ₹399
+                        </strong>
+
+                        <button onclick="addToCart('Extension Board')">
+                            🛒
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about-section" id="about">
+
+        <div class="about-image">
+            🏪
+        </div>
+
+
+        <div class="about-content">
+
+            <span>ABOUT US</span>
+
+            <h2>
+                Your Trusted
+                <span>Home & Electrical</span>
+                Store
+            </h2>
+
+            <p>
+                Maa Sharda Enterprises is your one-stop destination
+                for electrical items, home appliances, kitchen products
+                and household essentials.
+            </p>
+
+            <p>
+                We believe in providing quality products and
+                dependable service to every customer.
+            </p>
+
+            <a href="#contact" class="primary-btn">
+                Contact Us →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact-section" id="contact">
+
+        <div class="section-heading">
+
+            <span>GET IN TOUCH</span>
+
+            <h2>Contact Us</h2>
+
+            <p>
+                Have a question? We are here to help.
+            </p>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+
+                <div>
+                    📞
+                </div>
+
+                <h3>
+                    Call Us
+                </h3>
+
+                <p>
+                    +91 9118239297
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <div>
+                    📍
+                </div>
+
+                <h3>
+                    Visit Us
+                </h3>
+
+                <p>
+                    Fatehpur Bahua Tiraha,
+                    Uttar Pradesh 212601
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <div>
+                    💬
+                </div>
+
+                <h3>
+                    WhatsApp
+                </h3>
+
+                <p>
+                    Chat with us
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+
+            <div>
+
+                <div class="footer-logo">
+                    Maa Sharda Enterprises
+                </div>
+
+                <p>
+                    Your trusted destination for
+                    electrical products and home appliances.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="#home">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#products">Products</a>
+                <a href="#about">About Us</a>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Categories
+                </h3>
+
+                <a href="#">Dahej Collection</a>
+                <a href="#">Electrical Items</a>
+                <a href="#">Kitchen Appliances</a>
+                <a href="#">Home Appliances</a>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Contact
+                </h3>
+
+                <p>📞 +91 9118239297</p>
+                <p>📍 fatehpur bahua tiraha uttarpradesh 212601</p>
+                <p>✉️ shivamsingh749254@gmail.com</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 Maa Sharda Enterprises.
+            All Rights Reserved.
+
+        </div>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

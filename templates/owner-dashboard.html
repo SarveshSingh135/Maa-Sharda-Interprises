@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Owner Dashboard - Maa Sharda Enterprises</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #182238;
+        }
+
+        .navbar {
+            background: #182238;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logout {
+            background: white;
+            color: #182238;
+
+            padding: 10px 18px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+
+            margin: 40px auto;
+
+            padding: 20px;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            font-size: 20px;
+        }
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 25px;
+        }
+
+        .card {
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.07);
+
+            text-decoration: none;
+
+            color: #182238;
+
+            transition: 0.2s;
+        }
+
+        .card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.12);
+        }
+
+        .card h2 {
+
+            font-size: 30px;
+
+            margin-top: 0;
+        }
+
+        .card p {
+
+            font-size: 18px;
+
+            line-height: 1.5;
+        }
+
+        .card-link {
+
+            display: inline-block;
+
+            margin-top: 15px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+
+            .cards {
+
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+
+                padding: 15px;
+            }
+
+            .container {
+
+                margin: 20px auto;
+            }
+
+            .welcome h1 {
+
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            Maa Sharda Enterprises 👑
+        </div>
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout"
+        >
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+
+        <div class="welcome">
+
+            <h1>
+                Owner Dashboard
+            </h1>
+
+            <p>
+                Manage your Maa Sharda Enterprises website.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+
+            <!-- USERS -->
+
+            <a
+                href="{{ url_for('manage_users') }}"
+                class="card"
+            >
+
+                <h2>
+                    👥 Users
+                </h2>
+
+                <p>
+                    View and manage registered users.
+                </p>
+
+                <span class="card-link">
+                    Manage Users →
+                </span>
+
+            </a>
+
+
+            <!-- PRODUCTS -->
+
+            <a
+                href="{{ url_for('manage_products') }}"
+                class="card"
+            >
+
+                <h2>
+                    📦 Products
+                </h2>
+
+                <p>
+                    Add, edit and delete products.
+                </p>
+
+                <span class="card-link">
+                    Manage Products →
+                </span>
+
+            </a>
+
+
+            <!-- ORDERS -->
+
+            <a
+                href="{{ url_for('manage_orders') }}"
+                class="card"
+            >
+
+                <h2>
+                    🛒 Orders
+                </h2>
+
+                <p>
+                    View and manage customer orders.
+                </p>
+
+                <span class="card-link">
+                    Manage Orders →
+                </span>
+
+            </a>
+
+
+            <!-- REPORTS -->
+
+            <a
+                href="#"
+                class="card"
+                onclick="alert('Reports module next step me banega 📊'); return false;"
+            >
+
+                <h2>
+                    📊 Reports
+                </h2>
+
+                <p>
+                    View business information.
+                </p>
+
+                <span class="card-link">
+                    Coming Soon →
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

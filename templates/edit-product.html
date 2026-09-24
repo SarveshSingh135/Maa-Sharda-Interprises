@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Edit Product - Maa Sharda Enterprises
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #182238;
+        }
+
+        .navbar {
+            background: #182238;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            background: white;
+            color: #182238;
+            padding: 11px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .heading {
+            margin-bottom: 30px;
+        }
+
+        .heading h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .heading p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .form-box {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .update-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 9px;
+            background: #182238;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .update-btn:hover {
+            opacity: 0.9;
+        }
+
+        .info {
+            background: #f0f2f5;
+            padding: 15px;
+            border-radius: 9px;
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .heading h1 {
+                font-size: 30px;
+            }
+
+            .form-box {
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            Maa Sharda Enterprises 👑
+        </div>
+
+        <a
+            href="{{ url_for('manage_products') }}"
+            class="back-btn"
+        >
+            ← Products
+        </a>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+
+        <div class="heading">
+
+            <h1>
+                ✏️ Edit Product
+            </h1>
+
+            <p>
+                Update product information.
+            </p>
+
+        </div>
+
+
+        <div class="form-box">
+
+
+            <div class="info">
+
+                💡 Changes save hote hi MySQL database
+                me update ho jayenge.
+
+            </div>
+
+
+            <form method="POST">
+
+
+                <!-- PRODUCT NAME -->
+
+                <div class="form-group">
+
+                    <label>
+                        Product Name *
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ product.name }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label>
+                        Category *
+                    </label>
+
+                    <select
+                        name="category"
+                        required
+                    >
+
+                        <option
+                            value="Dahej Collection"
+                            {% if product.category == "Dahej Collection" %}selected{% endif %}
+                        >
+                            Dahej Collection
+                        </option>
+
+                        <option
+                            value="Electrical"
+                            {% if product.category == "Electrical" %}selected{% endif %}
+                        >
+                            Electrical
+                        </option>
+
+                        <option
+                            value="Kitchen Appliances"
+                            {% if product.category == "Kitchen Appliances" %}selected{% endif %}
+                        >
+                            Kitchen Appliances
+                        </option>
+
+                        <option
+                            value="Home Appliances"
+                            {% if product.category == "Home Appliances" %}selected{% endif %}
+                        >
+                            Home Appliances
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Price (₹) *
+                    </label>
+
+                    <input
+                        type="number"
+                        name="price"
+                        step="0.01"
+                        value="{{ product.price }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- OLD PRICE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Old Price (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="old_price"
+                        step="0.01"
+                        value="{{ product.old_price if product.old_price else '' }}"
+                    >
+
+                </div>
+
+
+                <!-- STOCK -->
+
+                <div class="form-group">
+
+                    <label>
+                        Stock *
+                    </label>
+
+                    <input
+                        type="number"
+                        name="stock"
+                        value="{{ product.stock }}"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- IMAGE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Image URL
+                    </label>
+
+                    <input
+                        type="url"
+                        name="image"
+                        value="{{ product.image if product.image else '' }}"
+                        placeholder="https://example.com/image.jpg"
+                    >
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label>
+                        Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        placeholder="Product description"
+                    >{{ product.description if product.description else '' }}</textarea>
+
+                </div>
+
+
+                <!-- UPDATE -->
+
+                <button
+                    type="submit"
+                    class="update-btn"
+                >
+                    💾 Update Product
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

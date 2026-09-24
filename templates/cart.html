@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart - Maa Sharda Enterprises</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/cart.css') }}">
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            <a href="{{ url_for('home') }}">
+                Maa Sharda Enterprises
+            </a>
+        </div>
+
+        <div>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('products') }}">Products</a>
+            <a href="{{ url_for('cart') }}">🛒 Cart</a>
+
+            {% if session.get("user_id") %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+
+    <section class="cart-page">
+
+        <h1 class="cart-title">
+            🛒 Your Shopping Cart
+        </h1>
+
+
+        {% if cart_items %}
+
+            {% for item in cart_items %}
+
+                <div class="cart-item">
+
+                    {% if item.product.image %}
+
+                        <img
+                            src="{{ item.product.image }}"
+                            alt="{{ item.product.name }}"
+                        >
+
+                    {% endif %}
+
+
+                    <div class="cart-info">
+
+                        <h3>
+                            {{ item.product.name }}
+                        </h3>
+
+                        <p>
+                            Category: {{ item.product.category }}
+                        </p>
+
+                        <p class="cart-price">
+                            ₹{{ "%.2f"|format(item.product.price) }}
+                        </p>
+
+                        <p>
+                            Quantity:
+                            <strong>{{ item.quantity }}</strong>
+                        </p>
+
+                    </div>
+
+
+                    <div class="cart-subtotal">
+                        ₹{{ "%.2f"|format(item.subtotal) }}
+                    </div>
+
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('remove_from_cart', product_id=item.product.id) }}"
+                    >
+
+                        <button
+                            type="submit"
+                            class="remove-btn"
+                        >
+                            Remove
+                        </button>
+
+                    </form>
+
+                </div>
+
+            {% endfor %}
+
+
+            <div class="cart-summary">
+
+                <div class="cart-total">
+                    Total:
+                    ₹{{ "%.2f"|format(total) }}
+                </div>
+
+
+                <div class="cart-actions">
+
+                    <a
+                        href="{{ url_for('products') }}"
+                        class="cart-btn continue-btn"
+                    >
+                        ← Continue Shopping
+                    </a>
+
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('clear_cart') }}"
+                    >
+
+                        <button
+                            type="submit"
+                            class="cart-btn clear-btn"
+                        >
+                            Clear Cart
+                        </button>
+
+                    </form>
+
+
+                    <a
+                        href="{{ url_for('checkout') }}"
+                        class="cart-btn checkout-btn"
+                    >
+                        Checkout →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        {% else %}
+
+            <div class="empty-cart">
+
+                <h2>
+                    Your cart is empty 🛒
+                </h2>
+
+                <p>
+                    Products add karo aur shopping start karo.
+                </p>
+
+                <br>
+
+                <a
+                    href="{{ url_for('products') }}"
+                    class="cart-btn checkout-btn"
+                >
+                    Browse Products
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</body>
+
+</html>

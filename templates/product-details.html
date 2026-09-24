@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% if product %}
+            {{ product.name }} | Maa Sharda Enterprises
+        {% else %}
+            Product Not Found | Maa Sharda Enterprises
+        {% endif %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/product-details.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <a href="/" class="logo">
+
+        <div class="logo-icon">
+            MS
+        </div>
+
+        <div>
+            <h2>Maa Sharda</h2>
+            <span>ENTERPRISES</span>
+        </div>
+
+    </a>
+
+
+    <nav>
+
+        <a href="/">Home</a>
+
+        <a href="/products">Products</a>
+
+        <a href="#">Categories</a>
+
+        <a href="#">About Us</a>
+
+        <a href="#">Contact</a>
+
+    </nav>
+
+
+    <div class="nav-actions">
+
+        <a href="/products" class="back-btn">
+            ← Products
+        </a>
+
+        <button class="cart-btn" type="button">
+            🛒 <span id="cartCount">0</span>
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<main class="details-container">
+
+
+    <a href="/products" class="back-link">
+        ← Back to Products
+    </a>
+
+
+    {% if product %}
+
+
+    <section class="product-details">
+
+
+        <!-- IMAGE -->
+
+        <div class="product-image-box">
+
+            <span class="product-badge">
+                Popular
+            </span>
+
+
+            <div class="product-big-image">
+
+                {% if product.image %}
+
+                    <img
+                        src="{{ product.image }}"
+                        alt="{{ product.name }}"
+                    >
+
+                {% else %}
+
+                    📦
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- INFORMATION -->
+
+        <div class="product-information">
+
+
+            <span class="category">
+                {{ product.category }}
+            </span>
+
+
+            <h1>
+                {{ product.name }}
+            </h1>
+
+
+            <div class="rating">
+
+                ⭐⭐⭐⭐⭐
+
+                <span>
+                    4.9 (120 Reviews)
+                </span>
+
+            </div>
+
+
+
+            <div class="price">
+
+                <strong>
+                    ₹{{ "%.2f"|format(product.price) }}
+                </strong>
+
+
+                {% if product.old_price %}
+
+                    <del>
+                        ₹{{ "%.2f"|format(product.old_price) }}
+                    </del>
+
+
+                    {% if product.old_price > product.price %}
+
+                        {% set discount =
+                            ((product.old_price - product.price)
+                            / product.old_price * 100)
+                        %}
+
+                        <span class="discount">
+                            {{ "%.0f"|format(discount) }}% OFF
+                        </span>
+
+                    {% endif %}
+
+                {% endif %}
+
+            </div>
+
+
+
+            <p class="description">
+
+                {% if product.description %}
+
+                    {{ product.description }}
+
+                {% else %}
+
+                    Quality product from Maa Sharda Enterprises.
+
+                {% endif %}
+
+            </p>
+
+
+
+            <div class="stock">
+
+                {% if product.stock > 0 %}
+
+                    ✓ In Stock
+                    ({{ product.stock }} available)
+
+                {% else %}
+
+                    ✕ Out of Stock
+
+                {% endif %}
+
+            </div>
+
+
+
+            {% if product.stock > 0 %}
+
+
+            <!-- QUANTITY -->
+
+            <div class="quantity-section">
+
+                <span>
+                    Quantity
+                </span>
+
+
+                <div class="quantity-control">
+
+                    <button
+                        type="button"
+                        onclick="decreaseQuantity()"
+                    >
+                        −
+                    </button>
+
+
+                    <span id="quantity">
+                        1
+                    </span>
+
+
+                    <button
+                        type="button"
+                        onclick="increaseQuantity()"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="action-buttons">
+
+                <button
+                    class="add-cart"
+                    type="button"
+                    onclick="addProductToCart()"
+                >
+                    🛒 Add to Cart
+                </button>
+
+
+                <button
+                    class="buy-now"
+                    type="button"
+                    onclick="buyProduct()"
+                >
+                    Buy Now →
+                </button>
+
+            </div>
+
+
+            {% endif %}
+
+
+
+            <!-- FEATURES -->
+
+            <div class="features">
+
+
+                <div>
+
+                    🚚
+
+                    <strong>
+                        Fast Delivery
+                    </strong>
+
+                    <small>
+                        Available locally
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    🔒
+
+                    <strong>
+                        Secure Payment
+                    </strong>
+
+                    <small>
+                        100% secure
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    ↩️
+
+                    <strong>
+                        Easy Return
+                    </strong>
+
+                    <small>
+                        Easy return policy
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- DESCRIPTION -->
+
+    <section class="description-section">
+
+        <h2>
+            Product Description
+        </h2>
+
+
+        <p>
+
+            {% if product.description %}
+
+                {{ product.description }}
+
+            {% else %}
+
+                {{ product.name }}
+                is a quality product from Maa Sharda Enterprises.
+
+            {% endif %}
+
+        </p>
+
+    </section>
+
+
+    {% else %}
+
+
+    <!-- PRODUCT NOT FOUND -->
+
+    <section class="description-section">
+
+        <h2>
+            📦 Product Not Found
+        </h2>
+
+        <p>
+            Sorry, this product is not available.
+        </p>
+
+        <br>
+
+        <a href="/products" class="back-btn">
+            ← Back to Products
+        </a>
+
+    </section>
+
+
+    {% endif %}
+
+
+</main>
+
+
+
+<script
+    src="{{ url_for('static', filename='js/product-details.js') }}"
+></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Add Product - Maa Sharda Enterprises
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #f4f6f8;
+
+            color: #182238;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+
+            background: #182238;
+
+            color: white;
+
+            padding: 18px 30px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        .logo {
+
+            font-size: 23px;
+
+            font-weight: bold;
+        }
+
+
+        .back-btn {
+
+            background: white;
+
+            color: #182238;
+
+            padding: 11px 20px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+
+        /* CONTAINER */
+
+        .container {
+
+            max-width: 750px;
+
+            margin: 40px auto;
+
+            padding: 20px;
+        }
+
+
+        .heading {
+
+            margin-bottom: 25px;
+        }
+
+
+        .heading h1 {
+
+            font-size: 38px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .heading p {
+
+            color: #666;
+
+            font-size: 18px;
+        }
+
+
+        /* FORM */
+
+        .form-box {
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 5px 25px
+                rgba(0,0,0,0.08);
+        }
+
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+            font-size: 16px;
+        }
+
+
+        input,
+        textarea,
+        select {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #d8d8d8;
+
+            border-radius: 9px;
+
+            font-size: 16px;
+
+            font-family: Arial, sans-serif;
+
+            outline: none;
+        }
+
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+
+            border-color: #182238;
+        }
+
+
+        textarea {
+
+            min-height: 120px;
+
+            resize: vertical;
+        }
+
+
+        .row {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 18px;
+        }
+
+
+        .submit-btn {
+
+            width: 100%;
+
+            margin-top: 10px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #182238;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .submit-btn:hover {
+
+            opacity: 0.92;
+        }
+
+
+        .note {
+
+            background: #f0f2f6;
+
+            padding: 13px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+            color: #555;
+
+            font-size: 14px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                padding: 15px;
+            }
+
+            .logo {
+
+                font-size: 18px;
+            }
+
+            .back-btn {
+
+                padding: 9px 12px;
+            }
+
+            .container {
+
+                margin: 20px auto;
+
+                padding: 15px;
+            }
+
+            .heading h1 {
+
+                font-size: 30px;
+            }
+
+            .form-box {
+
+                padding: 22px;
+            }
+
+            .row {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            Maa Sharda Enterprises 👑
+        </div>
+
+        <a
+            href="{{ url_for('manage_products') }}"
+            class="back-btn"
+        >
+            ← Products
+        </a>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+
+        <div class="heading">
+
+            <h1>
+                ➕ Add Product
+            </h1>
+
+            <p>
+                Add a new product to your Maa Sharda Enterprises store.
+            </p>
+
+        </div>
+
+
+        <div class="form-box">
+
+
+            <div class="note">
+
+                💡 Product save hone ke baad ye MySQL database
+                me store ho jayega.
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{{ url_for('add_product') }}"
+            >
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label>
+                        Product Name *
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Example: LED Bulb"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label>
+                        Category *
+                    </label>
+
+                    <select
+                        name="category"
+                        required
+                    >
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        <option value="Dahej Collection">
+                            Dahej Collection
+                        </option>
+
+                        <option value="Electrical">
+                            Electrical
+                        </option>
+
+                        <option value="Kitchen">
+                            Kitchen
+                        </option>
+
+                        <option value="Home Appliances">
+                            Home Appliances
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Price (₹) *
+                        </label>
+
+                        <input
+                            type="number"
+                            name="price"
+                            placeholder="199"
+                            min="0"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Old Price (₹)
+                        </label>
+
+                        <input
+                            type="number"
+                            name="old_price"
+                            placeholder="249"
+                            min="0"
+                            step="0.01"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- STOCK -->
+
+                <div class="form-group">
+
+                    <label>
+                        Stock *
+                    </label>
+
+                    <input
+                        type="number"
+                        name="stock"
+                        placeholder="50"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- IMAGE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Image URL
+                    </label>
+
+                    <input
+                        type="text"
+                        name="image"
+                        placeholder="https://example.com/product.jpg"
+                    >
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label>
+                        Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        placeholder="Enter product description..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+                    Add Product
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

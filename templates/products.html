@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Products | Maa Sharda Enterprises
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/products.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+
+    <header class="navbar">
+
+
+        <!-- LOGO -->
+
+        <a href="/" class="logo">
+
+            <div class="logo-icon">
+                MS
+            </div>
+
+            <div>
+
+                <h2>
+                    Maa Sharda
+                </h2>
+
+                <span>
+                    ENTERPRISES
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- NAVIGATION -->
+
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a
+                href="/products"
+                class="active"
+            >
+                Products
+            </a>
+
+            <a href="#">
+                Categories
+            </a>
+
+            <a href="#">
+                About Us
+            </a>
+
+            <a href="#">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <!-- NAV ACTIONS -->
+
+        <div class="nav-actions">
+
+
+            <button
+                onclick="openSearch()"
+                class="icon-btn"
+                type="button"
+            >
+                🔍
+            </button>
+
+
+            <button
+                onclick="showCart()"
+                class="cart-btn"
+                type="button"
+            >
+
+                🛒
+
+                <span id="cartCount">
+                    0
+                </span>
+
+            </button>
+
+
+            <a href="{{ url_for('login') }}" class="login-btn">
+                👤 Login
+            </a>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =========================================
+         SEARCH
+    ========================================== -->
+
+    <div class="search-area">
+
+        <div class="search-box">
+
+
+            <input
+                type="text"
+                id="productSearch"
+                placeholder="Search products..."
+                onkeyup="filterProducts()"
+            >
+
+
+            <button
+                onclick="filterProducts()"
+                type="button"
+            >
+                🔍
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         PAGE HEADER
+    ========================================== -->
+
+    <section class="page-header">
+
+
+        <span>
+            OUR COLLECTION
+        </span>
+
+
+        <h1>
+            All Products
+        </h1>
+
+
+        <p>
+
+            Explore electrical items,
+            home appliances,
+            kitchen products and
+            household essentials.
+
+        </p>
+
+
+    </section>
+
+
+
+    <!-- =========================================
+         PRODUCTS SECTION
+    ========================================== -->
+
+    <section class="products-section">
+
+
+        <!-- CATEGORY FILTER -->
+
+        <div class="category-filter">
+
+
+            <button
+                class="filter-btn active"
+                onclick="filterCategory('all', this)"
+                type="button"
+            >
+                All
+            </button>
+
+
+            <button
+                class="filter-btn"
+                onclick="filterCategory('dahej', this)"
+                type="button"
+            >
+                💍 Dahej Collection
+            </button>
+
+
+            <button
+                class="filter-btn"
+                onclick="filterCategory('electrical', this)"
+                type="button"
+            >
+                ⚡ Electrical
+            </button>
+
+
+            <button
+                class="filter-btn"
+                onclick="filterCategory('kitchen', this)"
+                type="button"
+            >
+                🍳 Kitchen
+            </button>
+
+
+            <button
+                class="filter-btn"
+                onclick="filterCategory('home', this)"
+                type="button"
+            >
+                🏠 Home Appliances
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =====================================
+             PRODUCT GRID
+        ====================================== -->
+
+        <div
+            class="product-grid"
+            id="productGrid"
+        >
+
+
+            {% if products %}
+
+
+                {% for product in products %}
+
+
+                    <!-- PRODUCT CARD -->
+
+                    <div
+                        class="product-card"
+
+                        data-category="
+                        {% if 'dahej' in product.category.lower() %}
+                            dahej
+                        {% elif 'electrical' in product.category.lower() %}
+                            electrical
+                        {% elif 'kitchen' in product.category.lower() %}
+                            kitchen
+                        {% elif 'home' in product.category.lower() %}
+                            home
+                        {% else %}
+                            other
+                        {% endif %}
+                        "
+
+                        data-name="{{ product.name.lower() }}"
+                    >
+
+
+                        <!-- PRODUCT IMAGE -->
+
+                        <div class="product-image">
+
+
+                            {% if product.image %}
+
+                                <img
+                                    src="{{ product.image }}"
+                                    alt="{{ product.name }}"
+                                    style="
+                                        width:100%;
+                                        height:100%;
+                                        object-fit:contain;
+                                        border-radius:12px;
+                                    "
+                                >
+
+                            {% else %}
+
+                                <span
+                                    style="
+                                        font-size:60px;
+                                    "
+                                >
+                                    📦
+                                </span>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+
+                        <!-- PRODUCT INFORMATION -->
+
+                        <div class="product-info">
+
+
+                            <!-- CATEGORY -->
+
+                            <span class="category-name">
+
+                                {{ product.category }}
+
+                            </span>
+
+
+
+                            <!-- PRODUCT NAME -->
+
+                            <h3>
+
+                                {{ product.name }}
+
+                            </h3>
+
+
+
+                            <!-- DESCRIPTION -->
+
+                            <p>
+
+                                {% if product.description %}
+
+                                    {{ product.description }}
+
+                                {% else %}
+
+                                    Quality product from
+                                    Maa Sharda Enterprises.
+
+                                {% endif %}
+
+                            </p>
+
+
+
+                            <!-- RATING -->
+
+                            <div class="rating">
+
+                                ⭐⭐⭐⭐⭐
+
+                            </div>
+
+
+
+                            <!-- PRICE ROW -->
+
+                            <div class="price-row">
+
+
+                                <div>
+
+
+                                    <strong>
+
+                                        ₹{{ "%.2f"|format(product.price) }}
+
+                                    </strong>
+
+
+
+                                    {% if product.old_price %}
+
+                                        <del>
+
+                                            ₹{{ "%.2f"|format(product.old_price) }}
+
+                                        </del>
+
+                                    {% endif %}
+
+
+                                </div>
+
+
+
+                                <!-- VIEW DETAILS -->
+
+                                <a
+                                    href="{{ url_for(
+                                        'product_details',
+                                        product_id=product.id
+                                    ) }}"
+                                    class="details-btn"
+                                >
+
+                                    View Details
+
+                                </a>
+
+
+
+                                <!-- ADD TO CART -->
+
+                                <button
+                                    class="add-btn"
+                                    type="button"
+                                    data-product-id="{{ product.id }}"
+                                    data-product-name="{{ product.name }}"
+                                    data-product-price="{{ product.price }}"
+                                >
+                                    🛒
+                               </button>
+                            </div>
+
+
+
+                            <!-- STOCK -->
+
+                            <div
+                                style="
+                                    margin-top:12px;
+                                    font-weight:bold;
+                                "
+                            >
+
+
+                                {% if product.stock > 0 %}
+
+                                    <span style="color:green;">
+
+                                        ✅ In Stock
+                                        ({{ product.stock }})
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span style="color:red;">
+
+                                        ❌ Out of Stock
+
+                                    </span>
+
+                                {% endif %}
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <!-- NO PRODUCTS -->
+
+                <div
+                    style="
+                        grid-column:1/-1;
+                        background:white;
+                        padding:60px 30px;
+                        border-radius:18px;
+                        text-align:center;
+                        box-shadow:
+                        0 5px 20px
+                        rgba(0,0,0,0.07);
+                    "
+                >
+
+
+                    <div
+                        style="
+                            font-size:60px;
+                            margin-bottom:20px;
+                        "
+                    >
+                        📦
+                    </div>
+
+
+                    <h2>
+                        No Products Available
+                    </h2>
+
+
+                    <p>
+
+                        Abhi database me
+                        koi product available nahi hai.
+
+                    </p>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================================
+         CART MODAL
+    ========================================== -->
+
+    <div
+        class="cart-overlay"
+        id="cartOverlay"
+    >
+
+
+        <div class="cart-box">
+
+
+            <!-- CLOSE -->
+
+            <button
+                class="close-cart"
+                onclick="closeCart()"
+                type="button"
+            >
+                ✕
+            </button>
+
+
+            <h2>
+                Your Cart 🛒
+            </h2>
+
+
+            <div id="cartItems">
+            </div>
+
+
+            <div class="cart-total">
+
+
+                <span>
+                    Total
+                </span>
+
+
+                <strong id="cartTotal">
+                    ₹0
+                </strong>
+
+
+            </div>
+
+
+            <button
+                class="checkout-btn"
+                onclick="checkout()"
+                type="button"
+            >
+
+                Proceed to Checkout
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/products.js'
+        ) }}"
+    ></script>
+
+
+</body>
+
+</html>
