@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+import os
 
 from extension import db
 from models import User, Product, Order, OrderItem
@@ -15,12 +16,11 @@ app.secret_key = "maa-sharda-secret-key-2026"
 
 
 # ==============================
-# MYSQL DATABASE
+# DATABASE CONFIGURATION
 # ==============================
 
-# IMPORTANT:
-# Apni existing SQLALCHEMY_DATABASE_URI wali line yahan same rakho.
-app.config["SQLALCHEMY_DATABASE_URI"] = (
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+    "DATABASE_URL",
     "mysql+pymysql://root:MaaSharda2026@localhost/maa_sharda"
 )
 
@@ -48,7 +48,6 @@ with app.app_context():
 
 @app.route("/")
 def home():
-
     return render_template("index.html")
 
 
