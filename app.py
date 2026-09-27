@@ -33,6 +33,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = database_url or (
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
+
 # ==============================
 # DATABASE
 # ==============================
