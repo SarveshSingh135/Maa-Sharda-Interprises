@@ -19,9 +19,15 @@ app.secret_key = "maa-sharda-secret-key-2026"
 # DATABASE CONFIGURATION
 # ==============================
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
-    "DATABASE_URL",
-    "mysql+pymysql://root:MaaSharda2026@localhost/maa_sharda"
+database_url = os.getenv("DATABASE_URL")
+
+if database_url and database_url.startswith("mysql://"):
+    database_url = database_url.replace(
+        "mysql://", "mysql+pymysql://", 1
+    )
+
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url or (
+    "mysql+pymysql://root:password@localhost/ma_sharda"
 )
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
