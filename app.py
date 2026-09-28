@@ -26,6 +26,9 @@ if database_url and database_url.startswith("mysql://"):
         "mysql://", "mysql+pymysql://", 1
     )
 
+if database_url:
+    database_url = database_url.split("?")[0]
+
 app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
