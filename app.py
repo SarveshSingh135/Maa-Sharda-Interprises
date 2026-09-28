@@ -26,9 +26,7 @@ if database_url and database_url.startswith("mysql://"):
         "mysql://", "mysql+pymysql://", 1
     )
 
-app.config["SQLALCHEMY_DATABASE_URI"] = database_url or (
-    "mysql+pymysql://root:password@localhost/ma_sharda"
-)
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
